@@ -1,0 +1,15 @@
+package com.springstudy.baseic_knowledge.polymorphic.upchange.abstract_method;
+
+import com.springstudy.baseic_knowledge.polymorphic.upchange.Note;
+
+/**
+ * Created by xgjt on 15/8/24.
+ */
+public class Brass extends Wind {
+    public void play(Note n){
+        System.out.println("Brass.play() "+n);
+    }
+    public void adjust(){
+        System.out.println("Brass.adjust():");
+    }
+}

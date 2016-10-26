@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!--parameterType：输入参数类型；   resultType：输出参数的类型-->
+
+
+<mapper namespace="com.springstudy.dao.UserDao">
+
+    <resultMap id="BaseResultMap" type="com.springstudy.model.User">
+        <id column="ID" property="id"/>
+        <result column="USER_ID" property="userid"/>
+        <result column="USER_NAME" property="username"/>
+        <result column="CREDITS" property="credits"/>
+        <result column="PASSWORD" property="password"/>
+        <result column="LAST_VISIT" property="lastvisit"/>
+        <result column="LAST_IP" property="lastip"/>
+    </resultMap>
+
+    <!--增删改查 每个语句的名称和参数不一样，要注意-->
+    <select id="findUserById" parameterType="int" resultType="User">
+              SELECT
+              user_id as "userid",
+              credits,
+              password ,
+              user_name as "username"
+              FROM t_user
+              WHERE id=#{id}
+    </select>
+
+    <!--注意：模糊查询字段必须用value字段-->
+    <select id="findUserByUsername" parameterType="String" resultType="com.springstudy.model.User">
+              select
+              user_id as "userid",
+              credits,
+              password ,
+              user_name as "username"
+              FROM  t_user
+              WHERE user_name LIKE '%${value}%';
+       </select>
+
+
+    <select id="findUserByUsernameAndPass" parameterType="String" resultType="com.springstudy.model.User">
+              select
+              user_id as "userid",
+              credits,
+              password ,
+              user_name as "username"
+              FROM  t_user
+              WHERE 1==1 AND '%${value}%';
+       </select>
+
+    <!--useGeneratedKeys返回自增id-->
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+              insert into t_user(
+              user_id,
+              credits,
+              password,
+              user_name)
+              values
+              (
+              #{userid},
+              #{credits},
+              #{password},
+              #{username})
+       </insert>
+
+    <delete id="deleteUserById" parameterType="int">
+              DELETE  FROM t_user WHERE id=#{id}
+       </delete>
+
+    <update id="updateUserById" parameterType="User">
+              UPDATE t_user set user_name= #{username} , credits= #{credits} where id=#{id}
+       </update>
+
+
+</mapper>

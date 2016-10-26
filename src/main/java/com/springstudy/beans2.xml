@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+
+    <!--该bean和父容器的car bean具有相同的id-->
+    <bean id="car" class="com.springstudy.model.Car0">
+        <property name="brand" value="吉利CT5"/>
+        <property name="maxSpeed" value="100"/>
+        <property name="price" value="1000.00"/>
+    </bean>
+
+    <bean id="boss" class="com.springstudy.attr.Boss">
+        <property name="car">
+            <ref parent="car"/>
+        </property>
+    </bean>
+
+
+</beans>
+
+
+

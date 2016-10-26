@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Bean头部 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+
+
+	<!-- 对包中的所有类进行扫描，以完成Bean创建和依赖注入的功能 需要更改 -->
+	<context:component-scan base-package="com.springstudy.controller" />
+	<!--扫描service类包，应用spring的注解配置-->
+	<context:component-scan base-package="com.springstudy.service"/>
+	<!--扫描Dao类包，将标注Spring注解的类自动转化为Bean，同时完成Bean的注入-->
+	<context:component-scan base-package="com.springstudy.dao"/>
+
+	<!-- 新的@Contoller注解支持类 -->
+	<!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />-->
+
+
+
+
+	<!-- HandlerMapping -->
+	<!--请求访问2:查找和web请求匹配对应的controller-->
+	<bean class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping"/>
+
+	<!-- HandlerAdapter -->
+	<!-- 简单控制器处理器适配器 -->
+	<!--请求访问 5：转化为访问controller-->
+	<bean class="org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter" />
+
+	<!-- ViewResolver 用于支持 Servlet、JSP 视图解析 -->
+	<!--请求访问8：拿到DispatcherServlet转手的ModelAndView ，解析成JstlView，返回给DispatcherServlet-->
+	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/views/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+
+	<!--请求访问：3: 匹配成功，找到controller-->
+	<bean name="/hello" class="com.springstudy.controller.HelloWorldController"/>
+
+</beans>

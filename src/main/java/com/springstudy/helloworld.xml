@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:p="http://www.springframework.org/schema/p"
+        xsi:schemaLocation="
+http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <!-- id 表示你这个组件的名字，class表示组件类 -->
+    <!--<bean id="hello" class="com.springstudy.service.test.HelloImpl" />-->
+
+    <!--这个brand属性的值将被工厂后处理器更改掉-->
+    <bean id="car" class="com.springstudy.model.Car" init-method="myInit" destroy-method="myDestroy"
+          p:brand="红旗CA72"
+          p:color="黑色"
+          p:maxSpeed="200"
+            />
+    <!--工厂后处理器-->
+    <bean id="myBeanPostProcessor" class="com.springstudy.beanfactory.MyBeanPostProcessor"/>
+    <!--注册Bean后处理器-->
+    <bean id="myBeanFactoryPostProcessor" class="com.springstudy.context.MyBeanFactoryPostProcessor"/>
+
+    <bean id="car3" class="com.springstudy.model.Car">
+        <constructor-arg index="0" type="java.lang.String">
+            <value>红旗102</value>
+        </constructor-arg>
+
+        <constructor-arg index="1" type="java.lang.String">
+            <value>中国一汽</value>
+        </constructor-arg>
+
+        <constructor-arg index="2" type="double">
+            <value>111111</value>
+        </constructor-arg>
+    </bean>
+
+
+
+
+    <!--继承关系-->
+
+    <bean id="car1" class="com.springstudy.model.Car" init-method="myInit" destroy-method="myDestroy"
+          p:brand="红旗CA72"
+          p:color="黑色"
+          p:maxSpeed="200"
+          abstract="true"
+            />
+
+    <bean id="car2" class="com.springstudy.model.Car" parent="car1"/>
+</beans>
+
+
+

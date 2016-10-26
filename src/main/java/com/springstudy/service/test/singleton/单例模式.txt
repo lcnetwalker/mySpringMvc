@@ -1,0 +1,76 @@
+1:单例模式
+单一实例，保证类在内存中只有一个对象
+比如：打印服务器，网站计数器
+
+java中应用：Runtime
+
+2、如何保证类在内存中只有一个对象？
+    A:把构造方法私有，目的不让外界创建对象。
+    B:在类本身创建一个对象，
+    C:通过公共的访问方式，给外界提供访问方式。
+
+3、饿汉式：
+    public class Student {
+        //为了不让外借访问，构造方法私有化
+        private Student(){
+
+        }
+
+        //同一个包才能访问这个类变量
+        static  String str="abc";
+
+        //创建一个对象
+        //为了让静态方法访问，则需要加个静态修饰符
+        //被private了  同包也不能访问
+
+        //类加载就生成该对象
+        private static Student  student = new Student();
+
+        public static Student getStudent(){
+            return  student;
+        }
+
+        public void show(){
+            System.out.println("单例！");
+        }
+    }
+
+4、懒汉式：
+    延迟加载思想：什么时候需要什么时候用   Hibernate  Spring
+
+    public class Teacher {
+
+        //构造私有
+        private Teacher(){}
+
+        //本类创建对象
+        private  static Teacher  t=null;
+
+        //提供功能的访问方式
+        public static  Teacher getTeacher(){
+            if (t==null){
+                t=new Teacher();
+            }
+            return  t;
+        }
+
+        //方法
+        public void love(){
+            System.out.println("懒汉模式");
+        }
+
+    }
+
+5、开发中通常使用饿汉式
+    原因是 多线程安全问题。
+
+6、其实在JDK提供的类中，存在单例模式的应用，谁呢？Runtime类
+
+    private static Runtime currentRuntime = new Runtime();
+
+
+        public static Runtime getRuntime() {
+            return currentRuntime;
+        }
+
+        private Runtime() {}

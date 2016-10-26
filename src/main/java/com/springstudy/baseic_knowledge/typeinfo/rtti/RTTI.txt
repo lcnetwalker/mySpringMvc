@@ -1,0 +1,33 @@
+1、基类包含draw()方法，通过传递this给sout，间接的使用toString()打印类标示符(toString加abstract，以此强制子类覆写此方法，
+并可以防止对无格式的Shape实例化)
+
+
+2、泛化的Class引用
+    Class引用表示的是它所指向的对象的确切类型，而该对象便是Class类的一个对象。在JavaSE5中，可以通过泛型对Class引用所指向的Class对象进行限定，并且可以让编译器强制执行额外的类型检查：
+    Class intCls = int.class;
+    // 使用泛型限定Class指向的引用
+    Class<Integer> genIntCls = int.class;
+    // 没有使用泛型的Clas可以重新赋值为指向任何其他的Class对象
+    intCls = double.class;
+    // 下面的编译会出错
+    // genIntCls = double.class;
+
+3、使用通配符?放松泛型的限定：
+    Class<?> intCls = int.class;
+    intCls = String.class;
+
+    在JavaSE5中，Class<?>优于平凡的Class，更建议使用Class<?>，即便它们是等价的，因为Class<?>的好处是它表示你并非是碰巧或者疏忽，而是使用了一个非具体的类引用。
+为了限定Class的引用为某种类型，或者该类型的子类型可以将通配符与extends一起使用，创建一个范围：
+    Class<? extends Number> num = int.class;
+    // num的引用范围为Number及其子类，所以可以按照如下赋值
+    num = double.class;
+    num = Number.class;
+
+4、类型转换前先检查
+    迄今为止，我们已知的RTTI形式包括：
+    1) 传统的类型转换,如 (Shape)
+    2) 代表对象类型的Class对象。通过查询Class对象可以获取运行时所需的信息。
+    3) RTTI在Java中还有第三种形式，就是关键字instanceof 。返回布尔值，告诉我们对象是不是某个特定类型的实例。
+        如：if(x instanceof Dog){
+                ((Dog)x).bark();
+            }

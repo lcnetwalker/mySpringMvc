@@ -1,0 +1,69 @@
+1、装饰模式：
+    指对XXX进行包装。
+    其实是给对象添加新的功能。
+
+2、给对象添加新的功能：
+    面向对象：继承
+    装饰模式
+
+3、举例：给手机添加新功能
+    A：继承实现
+
+    手机，具有打电话功能。
+
+    增加功能，先听到彩铃，再打电话（不能修改原有类，开闭原则[对扩展开放，对修改关闭]）。
+
+    可以改之前的Phone类，不好，因为不是所有人都需要打电话先听彩铃。
+    所以，我买写个具备彩铃功能的类。
+
+    public class ColorPhone extends Phone {
+        @Override
+        public void Call() {
+            System.out.println("手机可以播放彩铃了");
+    //        System.out.println("手机可以打电话");
+            super.Call();
+        }
+    }
+
+    社会继续发展，需求增加，听到音乐
+    方案2种：
+    a、继承ColorPhone
+    b、继承Phone，自己实现彩铃，调用父类的电话功能，再加音乐
+
+    有些人只想要打电话和听音乐功能。那么，还需要专门写这个功能的类
+
+    Phone
+        |--ColorPhone
+                |--MusicColorPhone
+        |--MusicPhone
+
+    需求增加，系统越来越臃肿，如何解决这个问题呢？这时候，开发者总结出规律：装饰设计模式。
+
+    B:通过装饰实现
+        a:被装饰的抽象事物是谁？
+            是手机(接口)。
+        b:具体的事物
+            实现手机接口的类
+        c:对手机进行装饰的抽象类
+
+        d:对手机进行具体装饰的类
+
+        总结：
+        Phone
+            |--PhoneDecorate
+                |--ColorPhoneDecorate
+                |--MusicPhoneDecorate
+                |--AgPhoneDecorate
+            |--PhoneImpl
+
+4、java的IO流(装饰模式体现)
+    BufferedInputStream
+    BufferedOutputStream
+
+    BufferedReader
+    BufferedWriter
+
+    Writer
+        |--OutStreamWriter
+            |--FileWriter
+        |--BufferedWriter
