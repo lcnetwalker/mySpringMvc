@@ -3,6 +3,7 @@ package com.springstudy.service.basic.string;
 
 import com.alibaba.druid.sql.visitor.functions.Trim;
 import com.fasterxml.jackson.databind.util.BeanUtil;
+import com.springstudy.service.basic.date.DateUtils;
 import com.springstudy.service.spring.SpringContextHolder;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.LocaleResolver;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -426,6 +429,33 @@ public class StringUtils extends org.apache.commons.lang3.StringUtils{
 	}
 
 
+	/**
+	 * 产生不重复8位数  根据每天的时间点产生，不同天内，产生的数字可能一样；可做每天内的流水号
+	 * @return
+	 */
+	private static String getNowMillSeconds() {
+		SimpleDateFormat dfs = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+		long between = 0;
+		try {
+			Date date = DateUtils.getDate();
+			String strDate = DateUtils.date2Str(date, DateUtils.date_sdf);
+
+			Date begin = dfs.parse(strDate + " 00:00:00.000");
+
+			between = (date.getTime() - begin.getTime());// 得到两者的毫秒数
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			return "00000001";
+		}
+		String sbetween = String.valueOf(between);
+
+		String before = "";
+		for(int i = 0; i < (8 - sbetween.length()); i++) {
+			before += "0";
+		}
+
+		return before + sbetween;
+	}
 
 
 }
