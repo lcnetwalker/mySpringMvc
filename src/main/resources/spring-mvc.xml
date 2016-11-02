@@ -67,7 +67,7 @@
 
     <!-- 视图解析器  对模型视图添加前后缀 -->
     <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver"
-          p:prefix="/views/" p:suffix=".jsp"/>
+          p:prefix="/WEB-INF/views/" p:suffix=".jsp"/>
 
     <!--文件上传-->
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
@@ -78,7 +78,7 @@
     </bean>
 
     <!--对静态资源文件的访问-->
-    <mvc:resources mapping="/assets/**" location="/assets/" />
+    <mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" />
 
     <mvc:interceptors>
         <mvc:interceptor>

@@ -37,7 +37,7 @@
 	<!--请求访问8：拿到DispatcherServlet转手的ModelAndView ，解析成JstlView，返回给DispatcherServlet-->
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
-		<property name="prefix" value="/views/"/>
+		<property name="prefix" value="/WEB-INF/views/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
 

@@ -2,7 +2,7 @@
 <%@ taglib uri="http://www.opensymphony.com/sitemesh/decorator" prefix="decorator"%> <html>
 
 <%@ page session="false"%>
-<%@ include file="/views/include/taglib.jsp"%>
+<%@ include file="/WEB-INF/views/include/taglib.jsp"%>
 <%@ taglib prefix="sitemesh"
            uri="http://www.opensymphony.com/sitemesh/decorator"%>
 

@@ -22,7 +22,7 @@ import java.util.Map;
  * Created by xgjt on 15/7/10.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:spring.xml","classpath:spring-mybatis.xml"})
+@ContextConfiguration(locations = {"classpath:spring-mvc.xml","classpath:spring-mybatis.xml"})
 public class MybatisTest {
 
     private  static final Logger logger = Logger.getLogger(MybatisTest.class);
@@ -30,9 +30,9 @@ public class MybatisTest {
     @Autowired
     private IUserService userService;
 
-    @Ignore
+    @Test
     public void del(){
-        userService.deleteUserById(4);
+        userService.deleteUserById(8);
     }
 
     @Ignore
