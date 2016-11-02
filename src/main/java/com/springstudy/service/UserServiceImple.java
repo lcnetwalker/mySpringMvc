@@ -39,6 +39,11 @@ public class UserServiceImple implements IUserService {
     }
 
     @Override
+    public List<User> findAllUsers() {
+        return userDao.findAllUsers();
+    }
+
+    @Override
     public User findUserByUsernameAndPass(String query) {
         return userDao.findUserByUsernameAndPass(query);
     }

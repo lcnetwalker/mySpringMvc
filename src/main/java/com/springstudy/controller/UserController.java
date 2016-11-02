@@ -116,7 +116,7 @@ public class UserController {
     @RequestMapping("showusers")
     public String showusers(Model modle,@RequestParam(value = "nm",required = true,defaultValue = "") String nm){
 
-        List<User> us = userServiceImple.findUserByUsername(nm);
+        List<User> us = userServiceImple.findAllUsers();
 
         modle.addAttribute("list",us);
         return "user/users-list";

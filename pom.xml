@@ -503,6 +503,9 @@
                 <artifactId>jetty-maven-plugin</artifactId>
                 <version>8.1.16.v20140903</version>
                 <configuration>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <contextXml>${project.basedir}/src/main/resources/jetty-context.xml</contextXml>
+
                     <webApp>
                         <contextPath>/</contextPath>
                     </webApp>

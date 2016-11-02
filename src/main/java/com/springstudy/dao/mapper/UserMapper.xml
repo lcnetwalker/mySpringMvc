@@ -29,6 +29,17 @@
               WHERE id=#{id}
     </select>
 
+    <!--所有用户-->
+    <select id="findAllUsers" parameterType="int" resultType="User">
+              SELECT
+              id,
+              user_id as "userid",
+              credits,
+              password ,
+              user_name as "username"
+              FROM t_user
+    </select>
+
     <!--注意：模糊查询字段必须用value字段-->
     <select id="findUserByUsername" parameterType="String" resultType="com.springstudy.model.User">
               select

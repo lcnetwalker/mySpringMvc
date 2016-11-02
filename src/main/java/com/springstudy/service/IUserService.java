@@ -18,6 +18,8 @@ public interface IUserService {
 
     public User findUserById(int id);
 
+    public List<User> findAllUsers();
+
     public User findUserByUsernameAndPass(String query);
 
     public List<User> findUserByUsername(String username);
