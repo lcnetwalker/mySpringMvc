@@ -47,7 +47,7 @@ public class HandlerInterceptor1 implements HandlerInterceptor {
     @Override
     public void postHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, ModelAndView modelAndView) throws Exception {
         i++;
-        System.out.println("拦截器执行！！！！！！"+i);
+        System.out.println("--------------postHandle 拦截器执行--------------"+i);
     }
 
     /**
@@ -61,6 +61,7 @@ public class HandlerInterceptor1 implements HandlerInterceptor {
      */
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-
+        i++;
+        System.out.println("--------------afterCompletion 拦截器执行--------------"+i);
     }
 }

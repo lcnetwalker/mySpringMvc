@@ -77,8 +77,8 @@
         </property>
     </bean>
 
-    <!--对静态资源文件的访问-->
-    <mvc:resources mapping="/assets/**" location="/WEB-INF/assets/" />
+    <!--对静态资源文件的访问 mapping映射的url-->
+    <mvc:resources mapping="/static/**" location="/static/" />
 
     <mvc:interceptors>
         <mvc:interceptor>

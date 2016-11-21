@@ -53,6 +53,8 @@
     <orderEntry type="library" name="Maven: org.mybatis:mybatis:3.3.0" level="project" />
     <orderEntry type="library" name="Maven: org.mybatis:mybatis-spring:1.2.3" level="project" />
     <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.30" level="project" />
+    <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper:4.1.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:0.9.4" level="project" />
     <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.1.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: junit:junit:4.10" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-core:1.1" level="project" />
@@ -260,5 +262,12 @@
     <orderEntry type="library" name="Maven: xpp3:xpp3_min:1.1.4c" level="project" />
     <orderEntry type="library" name="Maven: com.mobile:yd_inspurSmsApi:1.0" level="project" />
     <orderEntry type="library" name="Maven: com.gmk:sms-client:1.1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.gmk:platform-utils:0.1-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-collections4:4.1" level="project" />
+    <orderEntry type="library" name="Maven: ma.glasnost.orika:orika-core:1.4.6" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.19.0-GA" level="project" />
+    <orderEntry type="library" name="Maven: com.thoughtworks.paranamer:paranamer:2.7" level="project" />
+    <orderEntry type="library" name="Maven: com.googlecode.concurrentlinkedhashmap:concurrentlinkedhashmap-lru:1.2_jdk5" level="project" />
+    <orderEntry type="library" name="Maven: com.carrotsearch:java-sizeof:0.0.4" level="project" />
   </component>
 </module>

@@ -3,6 +3,7 @@ package com.springstudy.service;
 import com.springstudy.model.User;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 用户服务接口
@@ -18,7 +19,7 @@ public interface IUserService {
 
     public User findUserById(int id);
 
-    public List<User> findAllUsers();
+    public List<Map> findAllUsers();
 
     public User findUserByUsernameAndPass(String query);
 

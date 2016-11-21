@@ -1,16 +1,21 @@
 package com.springstudy.controller;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.alibaba.fastjson.JSONObject;
+import com.gmk.framework.common.web.*;
 import com.springstudy.exception.CustomException;
-import com.springstudy.interceptor.HandlerInterceptor1;
 import com.springstudy.model.User;
 import com.springstudy.service.UserServiceImple;
+import com.springstudy.service.basic.string.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,6 +24,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -27,21 +33,30 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/user")
-public class UserController {
+public class UserController{
 
     @Autowired
     UserServiceImple userServiceImple;
 
     @RequestMapping("index")
-    public String index(HttpServletRequest req) throws CustomException {
+    public String index(HttpServletRequest req) throws Exception {
 
         HttpSession session = req.getSession();
 
 //            throw new CustomException("我的异常");
         UUID uuid = UUID.randomUUID();
 
+        String currentViewPrefix = "";
+        RequestMapping requestMapping = (RequestMapping) AnnotationUtils.findAnnotation(this.getClass(), RequestMapping.class);
+        if(requestMapping != null && requestMapping.value().length > 0) {
+            currentViewPrefix = requestMapping.value()[0];
+        }
+        if(1==1){
+            throw new Exception("测试");
+        }
 
-        return "index";
+        return "/user/index";
+//        return "index";
     }
 
     @RequestMapping("register")
@@ -50,28 +65,30 @@ public class UserController {
     }
 
     @RequestMapping(value = "user.html",method = RequestMethod.POST)
-    public ModelAndView createUser(User user,
-                                   MultipartFile upfile) throws IOException {
+    public String createUser(User user,
+                                   MultipartFile upfile,RedirectAttributes attr) throws IOException {
 
         if (upfile!=null){
             //存储图片的路径
             String path="/Users/xgjt/gmkt/";
             //图片原来名称
             String originalFilename = upfile.getOriginalFilename();
-            //新的图片名称
-            String newfileName=UUID.randomUUID()+originalFilename.substring(originalFilename.lastIndexOf("."));
-             //新图片
-            File newfile = new File(path + newfileName);
+            if (StringUtils.isNotBlank(originalFilename)){
+                //新的图片名称
+                String newfileName=UUID.randomUUID()+originalFilename.substring(originalFilename.lastIndexOf("."));
+                //新图片
+                File newfile = new File(path + newfileName);
 
-            //存入磁盘
-            upfile.transferTo(newfile);
+                //存入磁盘
+                upfile.transferTo(newfile);
+            }
+
         }
-        userServiceImple.insertUser(user);
-        //userService.insertUser(user);
-        ModelAndView mav=new ModelAndView();
-        mav.setViewName("user/createSuccess");
 
-        return  mav;
+        userServiceImple.saveOrupdateUser(user);
+
+        attr.addFlashAttribute("message", "添加成功！");
+        return  "redirect:/user/showusers";
     }
 
     @RequestMapping("edit/{name}")
@@ -114,11 +131,16 @@ public class UserController {
      * 通过defaultValue可以设置成默认值，如果id参数没有传入，将默认值和形参绑定
      */
     @RequestMapping("showusers")
-    public String showusers(Model modle,@RequestParam(value = "nm",required = true,defaultValue = "") String nm){
+    public String showusers(Model modle,@RequestParam(value = "nm",required = true,defaultValue = "") String nm,
+                            @RequestParam(required = false,defaultValue = "1")int pageNo,
+                            @RequestParam(required = false,defaultValue = "10")int pageSize){
 
-        List<User> us = userServiceImple.findAllUsers();
+        List<Map> us = userServiceImple.findAllUsers();
 
-        modle.addAttribute("list",us);
+        PageHelper.startPage(pageNo, pageSize, true, null, true);
+        PageInfo page = new PageInfo(us);
+
+        modle.addAttribute("page",page);
         return "user/users-list";
     }
 

@@ -35,6 +35,7 @@ public class SystemController  {
         u.setCredits(1000);
         req.setAttribute("user", u);
 
+
         u.setUserid("fangsen.wei");
         String xghrhosturl="http://192.168.5.140:8086";
         //通过字符串获取返回json 字符串

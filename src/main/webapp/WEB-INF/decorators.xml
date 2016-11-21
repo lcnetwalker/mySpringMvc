@@ -1,5 +1,5 @@
-<decorators defaultdir="/WEB-INF/decorators">
-
+<!--decorators当前目录-->
+<decorators defaultdir="/WEB-INF/views/layouts">
 
     <excludes>
         <pattern>/static/*</pattern>
@@ -8,7 +8,7 @@
     </excludes>
 
 
-    <decorator name="main" page="main.jsp">
+    <decorator name="main" page="default0.jsp">
         <pattern>*</pattern>
     </decorator>
 

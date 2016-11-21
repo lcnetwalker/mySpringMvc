@@ -4,6 +4,7 @@ import com.springstudy.model.User;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by xgjt on 15/6/15.
@@ -20,7 +21,7 @@ public interface UserDao {
 
     public User findUserById(int id);
 
-    public List<User> findAllUsers();
+    public List<Map> findAllUsers();
 
     public User findUserByUsernameAndPass(String query);
 
