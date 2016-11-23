@@ -91,7 +91,7 @@ public class SerializeUtil extends SerializationUtils {
     public static <T> T deserializeFromString(String base64) {
         try {
             byte[] objectData = Base64.decode(base64);
-            return deserialize(objectData);
+            return (T) deserialize(objectData);
         } catch (Exception e) {
             throw new RuntimeException("deserialize session error", e);
         }
@@ -102,7 +102,7 @@ public class SerializeUtil extends SerializationUtils {
             List<T> list = Lists.newLinkedList();
             for (String base64 : base64s) {
                 byte[] objectData = Base64.decode(base64);
-                T t = deserialize(objectData);
+                T t = (T) deserialize(objectData);
                 list.add(t);
             }
             return list;
