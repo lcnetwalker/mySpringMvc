@@ -89,7 +89,6 @@
         src="/static/assets/plugins/jquery-validation/localization/messages_zh.js"
         type="text/javascript"></script>
 <script src="${ctx }/static/assets/plugins/dateformatter.js"></script>
-
 <h1>this is  sitemesh</h1>
 <hr>
 <decorator:body />
